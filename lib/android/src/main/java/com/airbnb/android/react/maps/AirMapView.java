@@ -116,9 +116,7 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
   private static Context getNonBuggyContext(ThemedReactContext reactContext,
       ReactApplicationContext appContext) {
     Context superContext = reactContext;
-    if (!contextHasBug(appContext.getCurrentActivity())) {
-      superContext = appContext.getCurrentActivity();
-    } else if (contextHasBug(superContext)) {
+    if (contextHasBug(superContext)) {
       // we have the bug! let's try to find a better context to use
       if (!contextHasBug(reactContext.getCurrentActivity())) {
         superContext = reactContext.getCurrentActivity();
@@ -198,7 +196,7 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
         coordinate.putDouble("speed", location.getSpeed());
         if(android.os.Build.VERSION.SDK_INT >= 18){
         coordinate.putBoolean("isFromMockProvider", location.isFromMockProvider());
-        }         
+        }
 
         event.putMap("coordinate", coordinate);
 
